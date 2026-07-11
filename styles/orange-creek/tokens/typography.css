@@ -1,0 +1,42 @@
+/* Orange Creek — Typography tokens
+   Three roles: Display (Space Grotesk), Body (Inter), Label (JetBrains Mono).
+   Display carries the brand — tight tracking, used for the wordmark, headings
+   and ALL numerals. Body is calm and legible. Labels are mono uppercase. */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Weights ---- */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+  /* ---- Tracking ---- */
+  --track-display: -0.03em;  /* headings & numerals */
+  --track-wordmark:-0.035em; /* the lockup */
+  --track-tight:   -0.02em;
+  --track-label:    0.22em;  /* mono eyebrows / labels */
+
+  /* ---- Display scale (Space Grotesk 600) ---- */
+  --text-hero:    84px;  /* cover / big statement */
+  --text-display: 52px;  /* page H1 */
+  --text-h1:      40px;
+  --text-h2:      30px;
+  --text-h3:      20px;
+  --text-h4:      17px;
+
+  /* ---- Body scale (Inter) ---- */
+  --text-lg:   17px;
+  --text-md:   15px;  /* default body / UI */
+  --text-sm:   14px;
+  --text-xs:   13px;
+  --leading-body: 1.55;
+
+  /* ---- Label (JetBrains Mono, uppercase) ---- */
+  --text-label: 11px;
+  --text-label-sm: 10px;
+}

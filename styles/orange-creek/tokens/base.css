@@ -1,0 +1,40 @@
+/* Orange Creek — base helpers
+   A thin layer of utility classes used across specimen cards, components and
+   UI kits. Not a reset — just the brand's recurring text + surface patterns. */
+
+.oc-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.oc-mono { font-family: var(--font-mono); }
+.oc-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-display);
+}
+.oc-body { font-family: var(--font-body); }
+
+/* surfaces */
+.oc-card {
+  background: var(--surface-card);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-card);
+}
+.oc-panel {
+  background: var(--panel);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-panel);
+}
+
+/* the brand dot — marker, never an icon */
+.oc-dot {
+  display: inline-block;
+  width: .58em;
+  height: .58em;
+  border-radius: 50%;
+  background: var(--orange);
+  flex: none;
+}

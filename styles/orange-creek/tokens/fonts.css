@@ -1,0 +1,10 @@
+/* Orange Creek — Webfonts
+   The brand uses three open-source families, loaded from Google Fonts:
+   - Space Grotesk : display, wordmark, numerals, headings
+   - Inter         : body, UI, tables
+   - JetBrains Mono : labels, eyebrows, metadata, page numbers
+   Loaded via @import so consuming projects ship the same declarations.
+   (If you need self-hosted/offline binaries, replace this with local @font-face
+    rules + woff2 files.) */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');

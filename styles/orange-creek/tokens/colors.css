@@ -1,0 +1,65 @@
+/* Orange Creek — Colour tokens
+   Bold but minimal. White is the base (~60% of any surface), ink for dark
+   planes, and the orange / blue / green trio strictly as accent.
+   The story: orange = the fruit/brand, green = the leaf, blue = the creek. */
+
+:root {
+  /* ---- Neutrals (cool — never sand / warm grey) ---- */
+  --white:   #ffffff;
+  --mist:    #f3f6fb;   /* cool light panel, hover, empty state */
+  --mist-2:  #e9eef6;   /* slightly deeper fill, track */
+  --line:    #e7ecf3;   /* 1px hairline */
+  --line-2:  #d9e0ea;   /* stronger border, secondary button outline */
+  --ink:     #0b1020;   /* dark base — text, dark screens, primary button */
+  --ink-2:   #141b30;   /* raised dark panel */
+  --ink-3:   #1b2440;   /* dark panel-2 */
+  --slate:   #5b6680;   /* muted text */
+  --slate-2: #8590a8;   /* faint text, labels */
+
+  /* ---- Brand trio ---- */
+  --orange:        #e26a2c;  /* primary accent — the dot, hero gradient, 1 CTA */
+  --orange-bright: #ff7a30;
+  --orange-deep:   #c4521b;
+  --blue:          #1b6fe0;  /* secondary — links, data tones, info badges */
+  --blue-bright:   #3b8bff;
+  --green:         #10b981;  /* positive — growth, success, "active", data */
+  --green-bright:  #34d399;
+
+  /* ---- Soft accent fills (brand @ ~12% for badges/tiles) ---- */
+  --orange-soft: #e26a2c1f;
+  --blue-soft:   #1b6fe01f;
+  --green-soft:  #10b9811f;
+
+  /* ---- Gradients — hero moments ONLY, one per screen ---- */
+  /* primary CTA / hero */
+  --grad-ob: linear-gradient(118deg, #e26a2c 0%, #1b6fe0 100%); /* @kind color */
+  /* story: fruit -> leaf -> creek */
+  --grad-tri: linear-gradient(118deg, #e26a2c 0%, #10b981 50%, #1b6fe0 100%); /* @kind color */
+  --grad-warm: linear-gradient(118deg, #ff7a30 0%, #e26a2c 55%, #c4521b 100%); /* @kind color */
+
+  /* ---- Semantic aliases (light theme = default) ---- */
+  --bg:           var(--white);
+  --surface:      var(--white);
+  --surface-card: var(--white);
+  --surface-sunk: var(--mist);
+  --surface-panel:var(--mist);
+  --panel:        var(--white);
+  --panel-2:      var(--mist);
+
+  --text:         var(--ink);
+  --text-strong:  var(--ink);
+  --text-muted:   var(--slate);
+  --text-faint:   var(--slate-2);
+  --muted:        var(--slate);
+  --muted-2:      var(--slate-2);
+
+  --border:       var(--line);
+  --border-strong:var(--line-2);
+
+  --accent:        var(--orange);
+  --accent-text:   #ffffff;
+  --link:          var(--blue);
+  --positive:      var(--green);
+  --info:          var(--blue);
+  --warn:          var(--orange);
+}

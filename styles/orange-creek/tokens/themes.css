@@ -1,0 +1,32 @@
+/* Orange Creek — Theme scopes
+   Two themes from one token set. Light is the default (declared in colors.css
+   on :root). Dark is for analysis / reporting and hero moments. Apply with the
+   `.thm.dark` class (or `[data-theme="dark"]`) on a wrapper. */
+
+.thm.dark,
+[data-theme="dark"] {
+  --bg:            #0b1020;
+  --surface:       #0b1020;
+  --surface-card:  #141b30;
+  --surface-sunk:  #141b30;
+  --surface-panel: #141b30;
+  --panel:         #141b30;
+  --panel-2:       #1b2440;
+
+  --text:          #ffffff;
+  --text-strong:   #ffffff;
+  --text-muted:    rgba(255,255,255,.62);
+  --text-faint:    rgba(255,255,255,.42);
+  --muted:         rgba(255,255,255,.62);
+  --muted-2:       rgba(255,255,255,.42);
+
+  --line:          rgba(255,255,255,.10);
+  --line-2:        rgba(255,255,255,.16);
+  --border:        rgba(255,255,255,.10);
+  --border-strong: rgba(255,255,255,.16);
+
+  --mist:          #141b30;
+  --mist-2:        #1b2440;
+
+  --accent-text:   #ffffff;
+}

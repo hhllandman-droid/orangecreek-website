@@ -1,0 +1,34 @@
+/* Orange Creek — Spacing, radius, shadow tokens
+   Restrained system. Radius steps: chip / card / panel. Spacing on a small
+   set of steps (14 / 18 / 24 / 28 are the workhorses). Shadows are soft and
+   rare — borders do most of the separation. */
+
+:root {
+  /* ---- Spacing scale ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 14px;   /* tight card gap */
+  --space-5: 18px;   /* default gap between cards */
+  --space-6: 24px;
+  --space-7: 28px;   /* content padding */
+  --space-8: 40px;
+  --space-9: 56px;
+
+  /* ---- Radius ---- */
+  --radius-chip:  9px;
+  --radius-card:  14px;
+  --radius-panel: 18px;
+  --radius-pill:  999px;
+
+  /* ---- Border ---- */
+  --border-width: 1px;
+
+  /* ---- Shadow (soft, sparing) ---- */
+  --shadow-card: 0 8px 24px -16px rgba(11,16,32,.40);
+  --shadow-pop:  0 20px 50px -30px rgba(11,16,32,.40);
+
+  /* ---- Layout ---- */
+  --sidebar-w: 226px;
+  --topbar-h:  64px;
+}
