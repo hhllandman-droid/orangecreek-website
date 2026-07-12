@@ -26,11 +26,13 @@ export const WebsiteSettings: GlobalConfig = {
           name: 'heroTitle',
           type: 'text',
           label: 'Hero titel',
+          defaultValue: 'When life gives oranges,',
         },
         {
           name: 'heroHighlight',
           type: 'text',
           label: 'Hero highlight (geaccentueerd deel)',
+          defaultValue: 'we make lemonade.',
         },
         {
           name: 'heroDescription',

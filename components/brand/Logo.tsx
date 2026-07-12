@@ -86,7 +86,7 @@ export function Logo({ size = 22, theme = "light", tagline = false }: LogoProps)
           >
             When life gives
             <br />
-            you oranges
+            oranges
           </span>
         </>
       ) : null}

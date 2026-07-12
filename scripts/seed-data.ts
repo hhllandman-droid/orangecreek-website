@@ -128,7 +128,7 @@ export const SEED_COMPANIES: SeedCompany[] = [
 export const SEED_WEBSITE_SETTINGS = {
   companyName: 'Orange Creek Capital',
   heroEyebrow: 'Participatiemaatschappij · van ondernemers, voor ondernemers',
-  heroTitle: 'When life gives you oranges,',
+  heroTitle: 'When life gives oranges,',
   heroHighlight: 'we make lemonade.',
   heroDescription:
     'We strippen complexiteit tot de kern en bouwen vandaaruit bedrijven met exponentieel groeipotentieel. Geen afstandelijke beheerders — ondernemers met visie en skin in the game.',

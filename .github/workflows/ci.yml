@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: orangecreek
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: orangecreek
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U orangecreek -d orangecreek"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: production
+      PAYLOAD_SECRET: ci-build-placeholder-secret-minimum-32-characters-long
+      DATABASE_URI: postgresql://orangecreek:test@localhost:5432/orangecreek
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies (same as Render)
+        run: npm ci --include=dev
+
+      - name: Run migrations
+        run: npm run migrate
+
+      - name: Build (same as Render)
+        run: npm run build

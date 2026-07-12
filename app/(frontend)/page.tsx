@@ -75,7 +75,7 @@ export default function Home() {
             Participatiemaatschappij · van ondernemers, voor ondernemers
           </div>
           <h1 className="landing-hero-title">
-            When life gives you oranges,{" "}
+            When life gives oranges,{" "}
             <span className="landing-hero-gradient-text">
               we make lemonade.
             </span>
