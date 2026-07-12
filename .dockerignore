@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.github
+.env
+.env.*
+*.log
+.DS_Store
+coverage
+.vscode
+.idea
+README.md
+AGENTS.md
+CLAUDE.md

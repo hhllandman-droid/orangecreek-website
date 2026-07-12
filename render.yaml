@@ -13,13 +13,15 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: npm ci --include=dev && npm run build
+    buildCommand: npm install --include=dev --prefer-offline --no-audit --no-fund && npm run build
     startCommand: sh scripts/start-production.sh
-    preDeployCommand: npm run migrate
+    preDeployCommand: npm run migrate && npm run seed
     autoDeployTrigger: commit
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
       - key: NEXT_PUBLIC_SERVER_URL
         value: https://orangecreek.co
       - key: DATABASE_URI

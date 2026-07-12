@@ -2,6 +2,7 @@ import * as migration_20260712_113452_initial from './20260712_113452_initial';
 import * as migration_20260712_115132_schema_update from './20260712_115132_schema_update';
 import * as migration_20260712_120255_portfolio_cms_sync from './20260712_120255_portfolio_cms_sync';
 import * as migration_20260712_122800_production_schema_repair from './20260712_122800_production_schema_repair';
+import * as migration_20260712_144500_admin_portfolio_fix from './20260712_144500_admin_portfolio_fix';
 
 export const migrations = [
   {
@@ -23,5 +24,10 @@ export const migrations = [
     up: migration_20260712_122800_production_schema_repair.up,
     down: migration_20260712_122800_production_schema_repair.down,
     name: '20260712_122800_production_schema_repair',
+  },
+  {
+    up: migration_20260712_144500_admin_portfolio_fix.up,
+    down: migration_20260712_144500_admin_portfolio_fix.down,
+    name: '20260712_144500_admin_portfolio_fix',
   },
 ];
