@@ -14,7 +14,7 @@ services:
     plan: free
     region: frankfurt
     buildCommand: npm install --include=dev --prefer-offline --no-audit --no-fund && npm run build
-    startCommand: sh scripts/start-production.sh
+    startCommand: npm start
     preDeployCommand: npx tsx scripts/ensure-schema.ts && npm run migrate && npm run seed
     autoDeployTrigger: commit
     envVars:
@@ -30,5 +30,3 @@ services:
           property: connectionString
       - key: PAYLOAD_SECRET
         generateValue: true
-      - key: PAYLOAD_DEBUG
-        value: "true"

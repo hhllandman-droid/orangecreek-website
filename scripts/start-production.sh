@@ -22,4 +22,4 @@ else
   echo "WARNING: seed failed — continuing startup."
 fi
 
-exec npm start
+exec npm run start:next
