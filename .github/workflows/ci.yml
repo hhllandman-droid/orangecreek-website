@@ -39,11 +39,5 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install dependencies (same as Render)
-        run: npm ci --include=dev
-
-      - name: Run migrations
-        run: npm run migrate
-
-      - name: Build (same as Render)
-        run: npm run build
+      - name: Install and build (same as Render)
+        run: npm ci --include=dev && npm run migrate && npm run build
