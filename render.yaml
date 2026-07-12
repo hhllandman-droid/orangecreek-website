@@ -15,7 +15,7 @@ services:
     region: frankfurt
     buildCommand: npm install --include=dev --prefer-offline --no-audit --no-fund && npm run build
     startCommand: sh scripts/start-production.sh
-    preDeployCommand: npm run migrate && npm run seed
+    preDeployCommand: npx tsx scripts/ensure-schema.ts && npm run migrate && npm run seed
     autoDeployTrigger: commit
     envVars:
       - key: NODE_ENV

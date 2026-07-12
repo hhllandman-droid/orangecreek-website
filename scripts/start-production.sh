@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -u
 
+echo "Ensuring database schema..."
+if npx tsx scripts/ensure-schema.ts; then
+  echo "Schema ensure complete."
+else
+  echo "WARNING: ensure-schema failed — continuing startup."
+fi
+
 echo "Running database migrations..."
 if npm run migrate; then
   echo "Migrations complete."
