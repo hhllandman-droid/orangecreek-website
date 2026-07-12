@@ -1,38 +1,47 @@
-import { getPayloadClient } from '@/lib/payload'
+import {
+  getActivePortfolioCompanies,
+  getWebsiteSettings,
+} from '@/lib/cms'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 /**
- * Voorbeeld: portefeuillebedrijven ophalen in een Server Component.
- * Gebruikt de Payload Local API — geen HTTP-overhead.
+ * Voorbeeld Server Component: portefeuillebedrijven ophalen via Payload Local API.
+ *
+ * ```tsx
+ * import { getActivePortfolioCompanies } from '@/lib/cms'
+ *
+ * const companies = await getActivePortfolioCompanies()
+ * ```
  */
 export default async function PortfolioPage() {
-  const payload = await getPayloadClient()
-
-  const { docs: companies } = await payload.find({
-    collection: 'portfolio-companies',
-    sort: 'order',
-    where: {
-      status: {
-        equals: 'actief',
-      },
-    },
-    limit: 50,
-  })
+  const [companies, settings] = await Promise.all([
+    getActivePortfolioCompanies(),
+    getWebsiteSettings(),
+  ])
 
   return (
     <main style={{ padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
-      <h1>Portefeuille</h1>
-      <p>
-        Voorbeeldpagina — data uit Payload CMS via de Local API in een Server
-        Component.
+      <h1>{settings.companyName ?? 'Portefeuille'}</h1>
+      <p style={{ color: '#666' }}>
+        Data uit Payload CMS — collectie <code>portfolio-companies</code>
       </p>
       <ul>
         {companies.map((company) => (
-          <li key={company.id}>
+          <li key={company.id} style={{ marginBottom: '1rem' }}>
             <strong>{company.companyName}</strong>
-            {company.sector && ` · ${company.sector}`}
+        {company.domainLabel && ` · ${company.domainLabel}`}
+            {company.revenueGrowth && ` · groei ${company.revenueGrowth}`}
+            {company.website && (
+              <>
+                {' '}
+                ·{' '}
+                <a href={company.website} target="_blank" rel="noreferrer">
+                  Website
+                </a>
+              </>
+            )}
             {company.shortDescription && (
               <p style={{ margin: '0.25rem 0', color: '#555' }}>
                 {company.shortDescription}
@@ -43,8 +52,7 @@ export default async function PortfolioPage() {
       </ul>
       {companies.length === 0 && (
         <p>
-          Nog geen bedrijven — voeg ze toe via{' '}
-          <a href="/admin">/admin</a>.
+          Nog geen bedrijven — voeg ze toe via <a href="/admin">/admin</a>.
         </p>
       )}
     </main>

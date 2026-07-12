@@ -24,6 +24,7 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: '— Orange Creek CMS',
+      description: 'Contentbeheer voor Orange Creek Capital',
     },
   },
   collections: [Users, Media, PortfolioCompanies, News],

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { Logo } from "@/components/brand/Logo";
-import OrangeCreekPortfolio from "@/components/landing/OrangeCreekPortfolio";
+import PortfolioSection from "@/components/landing/PortfolioSection";
 import "@/styles/landing.css";
 
 const stats = [
-  { value: "5", label: "Deelnemingen" },
+  { value: "8", label: "Deelnemingen" },
   { value: "8 jr", label: "Gem. holdperiode" },
   { value: "€22M", label: "NAV (Net asset value)" },
   { value: "8,5×", label: "Gem. multiple" },
@@ -169,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <OrangeCreekPortfolio />
+      <PortfolioSection />
 
       <section id="contact" className="landing-contact">
         <div className="landing-contact-glow" />

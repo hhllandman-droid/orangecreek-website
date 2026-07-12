@@ -1,31 +1,22 @@
-import { getPayloadClient } from '@/lib/payload'
+import { getPublishedNews, getWebsiteSettings } from '@/lib/cms'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 /**
- * Voorbeeld: gepubliceerd nieuws ophalen in een Server Component.
- * Access control wordt gerespecteerd (overrideAccess: false).
+ * Voorbeeld Server Component: nieuws ophalen via Payload Local API.
+ *
+ * ```tsx
+ * import { getPublishedNews } from '@/lib/cms'
+ *
+ * const articles = await getPublishedNews(10)
+ * ```
  */
 export default async function NieuwsPage() {
-  const payload = await getPayloadClient()
-
-  const { docs: articles } = await payload.find({
-    collection: 'news',
-    sort: '-publishedDate',
-    where: {
-      status: {
-        equals: 'published',
-      },
-    },
-    limit: 20,
-    overrideAccess: false,
-  })
-
-  const settings = await payload.findGlobal({
-    slug: 'website-settings',
-    overrideAccess: false,
-  })
+  const [articles, settings] = await Promise.all([
+    getPublishedNews(),
+    getWebsiteSettings(),
+  ])
 
   return (
     <main style={{ padding: '2rem', fontFamily: 'system-ui, sans-serif' }}>
@@ -48,8 +39,7 @@ export default async function NieuwsPage() {
       </ul>
       {articles.length === 0 && (
         <p>
-          Nog geen nieuws — publiceer items via{' '}
-          <a href="/admin">/admin</a>.
+          Nog geen nieuws — publiceer items via <a href="/admin">/admin</a>.
         </p>
       )}
     </main>

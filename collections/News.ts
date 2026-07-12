@@ -90,35 +90,6 @@ export const News: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'author',
-      type: 'relationship',
-      label: 'Auteur',
-      relationTo: 'users',
-      defaultValue: ({ user }) => user?.id,
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    {
-      type: 'collapsible',
-      label: 'SEO',
-      admin: {
-        initCollapsed: true,
-      },
-      fields: [
-        {
-          name: 'seoTitle',
-          type: 'text',
-          label: 'SEO-titel',
-        },
-        {
-          name: 'seoDescription',
-          type: 'textarea',
-          label: 'SEO-beschrijving',
-        },
-      ],
-    },
   ],
   timestamps: true,
 }

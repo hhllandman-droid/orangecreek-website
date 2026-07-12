@@ -13,6 +13,8 @@ export type PortfolioCompanyItem = {
 
 type OrangeCreekPortfolioProps = {
   companies?: PortfolioCompanyItem[];
+  edges?: [number, number][];
+  nodePositions?: { x: number; y: number }[];
   title?: string;
   disclaimer?: string;
 };
@@ -42,7 +44,9 @@ const NODE_POS = [
   { x: 22, y: 18 }, { x: 56, y: 12 }, { x: 79, y: 32 }, { x: 42, y: 42 },
   { x: 18, y: 62 }, { x: 66, y: 60 }, { x: 36, y: 84 }, { x: 78, y: 84 },
 ];
-const EDGES = [[0, 1], [1, 2], [0, 3], [1, 3], [3, 4], [3, 5], [2, 5], [4, 6], [5, 6], [5, 7], [6, 7]];
+const DEFAULT_EDGES: [number, number][] = [
+  [0, 1], [1, 2], [0, 3], [1, 3], [3, 4], [3, 5], [2, 5], [4, 6], [5, 6], [5, 7], [6, 7],
+];
 
 const KEYFRAMES = `
 @keyframes oc-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -221,10 +225,20 @@ function MarqueeRow({
 }
 
 export default function OrangeCreekPortfolio({
-  companies = DEFAULT_COMPANIES,
-  title = "23 bedrijven, één waardeketen.",
+  companies: companiesProp,
+  edges: edgesProp,
+  nodePositions: nodePositionsProp,
+  title = "8 bedrijven, één waardeketen.",
   disclaimer = "Namen en cijfers zijn placeholders tot publicatie is afgestemd met de deelnemingen.",
 }: OrangeCreekPortfolioProps) {
+  const companies =
+    companiesProp && companiesProp.length > 0 ? companiesProp : DEFAULT_COMPANIES;
+  const edges =
+    edgesProp && edgesProp.length > 0 ? edgesProp : DEFAULT_EDGES;
+  const baseNodePositions =
+    nodePositionsProp && nodePositionsProp.length > 0
+      ? nodePositionsProp
+      : NODE_POS;
   useKeyframes();
   const [view, setView] = useState<"ticker" | "keten">("ticker");
   const [active, setActive] = useState(0);
@@ -235,7 +249,7 @@ export default function OrangeCreekPortfolio({
   const rowB = companies.slice(half);
 
   const t = useDriftClock(view === "keten");
-  const pos = NODE_POS.map((p, i) => ({
+  const pos = baseNodePositions.map((p, i) => ({
     x: p.x + Math.sin(t * (0.5 + (i % 3) * 0.15) + i * 1.7) * 1.2,
     y: p.y + Math.cos(t * (0.4 + (i % 4) * 0.12) + i * 2.3) * 1.8,
   }));
@@ -569,7 +583,7 @@ export default function OrangeCreekPortfolio({
                   zIndex: 1,
                 }}
               >
-                {EDGES.map(([a, b], i) => {
+                {edges.map(([a, b], i) => {
                   const hot = active === a || active === b;
                   return (
                     <path
@@ -592,7 +606,7 @@ export default function OrangeCreekPortfolio({
                   );
                 })}
               </svg>
-              {companies.slice(0, NODE_POS.length).map((company, i) => {
+              {companies.slice(0, baseNodePositions.length).map((company, i) => {
                 const on = active === i;
                 const dot = on ? T.orange : trio[i % 3];
                 return (

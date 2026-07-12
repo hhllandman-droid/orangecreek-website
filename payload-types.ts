@@ -183,7 +183,10 @@ export interface PortfolioCompany {
    */
   generateSlug?: boolean | null;
   slug: string;
-  logo?: (number | null) | Media;
+  /**
+   * Korte label op de website, bijv. "SaaS · workflow"
+   */
+  domainLabel?: string | null;
   shortDescription?: string | null;
   longDescription?: {
     root: {
@@ -200,11 +203,14 @@ export interface PortfolioCompany {
     };
     [k: string]: unknown;
   } | null;
+  logo?: (number | null) | Media;
   website?: string | null;
-  sector?: ('zorg' | 'vastgoed' | 'tech' | 'overig') | null;
+  sector?: ('zorg' | 'vastgoed' | 'tech' | 'energie' | 'logistiek' | 'overig') | null;
   investmentYear?: number | null;
-  status?: ('actief' | 'exited' | 'in-due-diligence') | null;
-  location?: string | null;
+  status?: ('actief' | 'exited') | null;
+  revenueGrowth?: string | null;
+  ebitdaMargin?: string | null;
+  multiple?: string | null;
   keyMetrics?:
     | {
         metricName: string;
@@ -213,7 +219,22 @@ export interface PortfolioCompany {
         id?: string | null;
       }[]
     | null;
+  location?: string | null;
+  /**
+   * Selecteer welke andere deelnemingen verbonden zijn in de waardeketen-visualisatie.
+   */
+  connectedCompanies?: (number | PortfolioCompany)[] | null;
+  /**
+   * X/Y in procenten (0–100) voor de waardeketen-weergave.
+   */
+  chainPosition?: {
+    x?: number | null;
+    y?: number | null;
+  };
   featured?: boolean | null;
+  /**
+   * Bepaalt volgorde in ticker én index in ketengrafiek
+   */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -250,9 +271,6 @@ export interface News {
   featuredImage?: (number | null) | Media;
   category?: ('bedrijfsnieuws' | 'portfolio' | 'markt' | 'overig') | null;
   status: 'draft' | 'published';
-  author?: (number | null) | User;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -388,14 +406,17 @@ export interface PortfolioCompaniesSelect<T extends boolean = true> {
   companyName?: T;
   generateSlug?: T;
   slug?: T;
-  logo?: T;
+  domainLabel?: T;
   shortDescription?: T;
   longDescription?: T;
+  logo?: T;
   website?: T;
   sector?: T;
   investmentYear?: T;
   status?: T;
-  location?: T;
+  revenueGrowth?: T;
+  ebitdaMargin?: T;
+  multiple?: T;
   keyMetrics?:
     | T
     | {
@@ -403,6 +424,14 @@ export interface PortfolioCompaniesSelect<T extends boolean = true> {
         value?: T;
         unit?: T;
         id?: T;
+      };
+  location?: T;
+  connectedCompanies?: T;
+  chainPosition?:
+    | T
+    | {
+        x?: T;
+        y?: T;
       };
   featured?: T;
   order?: T;
@@ -423,9 +452,6 @@ export interface NewsSelect<T extends boolean = true> {
   featuredImage?: T;
   category?: T;
   status?: T;
-  author?: T;
-  seoTitle?: T;
-  seoDescription?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -475,6 +501,12 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface WebsiteSetting {
   id: number;
+  heroEyebrow?: string | null;
+  heroTitle?: string | null;
+  heroHighlight?: string | null;
+  heroDescription?: string | null;
+  heroCtaLabel?: string | null;
+  heroCtaUrl?: string | null;
   companyName?: string | null;
   tagline?: string | null;
   companyDescription?: {
@@ -496,6 +528,8 @@ export interface WebsiteSetting {
   contactPhone?: string | null;
   address?: string | null;
   linkedInUrl?: string | null;
+  portfolioTitle?: string | null;
+  portfolioDisclaimer?: string | null;
   seoTitle?: string | null;
   seoDescription?: string | null;
   updatedAt?: string | null;
@@ -506,6 +540,12 @@ export interface WebsiteSetting {
  * via the `definition` "website-settings_select".
  */
 export interface WebsiteSettingsSelect<T extends boolean = true> {
+  heroEyebrow?: T;
+  heroTitle?: T;
+  heroHighlight?: T;
+  heroDescription?: T;
+  heroCtaLabel?: T;
+  heroCtaUrl?: T;
   companyName?: T;
   tagline?: T;
   companyDescription?: T;
@@ -513,6 +553,8 @@ export interface WebsiteSettingsSelect<T extends boolean = true> {
   contactPhone?: T;
   address?: T;
   linkedInUrl?: T;
+  portfolioTitle?: T;
+  portfolioDisclaimer?: T;
   seoTitle?: T;
   seoDescription?: T;
   updatedAt?: T;

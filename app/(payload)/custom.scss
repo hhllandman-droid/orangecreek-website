@@ -1,1 +1,32 @@
-/* leeg — voeg hier custom admin panel styling toe indien gewenst */
+/* Orange Creek admin panel branding */
+:root {
+  --theme-bg: #0b1020;
+  --theme-input-bg: #141b2e;
+  --theme-elevation-0: #0b1020;
+  --theme-elevation-50: #111827;
+  --theme-elevation-100: #1a2236;
+  --theme-elevation-150: #1f2a42;
+  --theme-elevation-200: #24304d;
+  --theme-elevation-250: #2a3858;
+  --theme-elevation-300: #304064;
+  --theme-elevation-350: #364870;
+  --theme-elevation-400: #3c507c;
+  --theme-elevation-450: #425888;
+  --theme-elevation-500: #486094;
+  --theme-elevation-550: #4e68a0;
+  --theme-elevation-600: #5470ac;
+  --theme-elevation-650: #5a78b8;
+  --theme-elevation-700: #6080c4;
+  --theme-elevation-750: #6688d0;
+  --theme-elevation-800: #6c90dc;
+  --theme-elevation-850: #7298e8;
+  --theme-elevation-900: #78a0f4;
+  --theme-elevation-950: #7ea8ff;
+  --theme-elevation-1000: #84b0ff;
+  --theme-success-500: #22c55e;
+  --theme-warning-500: #f59e0b;
+  --theme-error-500: #ef4444;
+  --theme-text: #f8fafc;
+  --theme-baseline: #94a3b8;
+  --theme-baseline-emphasis: #cbd5e1;
+}
