@@ -279,7 +279,10 @@ export default function OrangeCreekPortfolio({
     <section
       id="portfolio"
       style={{
-        background: T.ink,
+        background:
+          view === "keten"
+            ? "radial-gradient(ellipse 120% 90% at 58% 42%, #131a33 0%, #0b1020 55%, #0b1020 100%)"
+            : T.ink,
         position: "relative",
         overflow: "hidden",
         fontFamily: T.body,
@@ -294,10 +297,61 @@ export default function OrangeCreekPortfolio({
           height: 440,
           borderRadius: "50%",
           background: T.orange,
-          opacity: 0.18,
+          opacity: view === "keten" ? 0.22 : 0.18,
           filter: "blur(120px)",
         }}
       />
+
+      {view === "keten" ? (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: "18%",
+              right: "-8%",
+              width: 560,
+              height: 560,
+              borderRadius: "50%",
+              background: T.orange,
+              opacity: 0.14,
+              filter: "blur(130px)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-12%",
+              left: "-6%",
+              width: 620,
+              height: 620,
+              borderRadius: "50%",
+              background: T.blue,
+              opacity: 0.16,
+              filter: "blur(140px)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: STAR_LAYER_1,
+              animation: "oc-twinkle 5s ease-in-out infinite",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: STAR_LAYER_2,
+              animation: "oc-twinkle 7s ease-in-out infinite reverse",
+              pointerEvents: "none",
+            }}
+          />
+        </>
+      ) : null}
 
       <div
         style={{
@@ -428,163 +482,112 @@ export default function OrangeCreekPortfolio({
             style={{
               position: "relative",
               margin: "0 -32px",
-              minHeight: "clamp(520px, 58vh, 680px)",
+              minHeight: "clamp(560px, 62vh, 760px)",
             }}
           >
-            <div
+            <svg
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
               style={{
                 position: "absolute",
                 inset: 0,
-                overflow: "visible",
-                background:
-                  "radial-gradient(ellipse 90% 80% at 62% 35%, #131a33 0%, #0b1020 50%, #070b18 100%)",
+                width: "100%",
+                height: "100%",
+                zIndex: 1,
+                pointerEvents: "none",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: -120,
-                  right: -40,
-                  width: 520,
-                  height: 520,
-                  borderRadius: "50%",
-                  background: T.orange,
-                  opacity: 0.14,
-                  filter: "blur(120px)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: -160,
-                  left: -60,
-                  width: 560,
-                  height: 560,
-                  borderRadius: "50%",
-                  background: T.blue,
-                  opacity: 0.16,
-                  filter: "blur(130px)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: STAR_LAYER_1,
-                  animation: "oc-twinkle 5s ease-in-out infinite",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: STAR_LAYER_2,
-                  animation: "oc-twinkle 7s ease-in-out infinite reverse",
-                }}
-              />
-              <svg
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  zIndex: 1,
-                }}
-              >
-                {edges.map(([a, b], i) => {
-                  const hot = active === a || active === b;
-                  return (
-                    <path
-                      key={i}
-                      d={curve(a, b)}
-                      fill="none"
-                      stroke={hot ? T.orange : "rgba(255,255,255,.14)"}
-                      strokeWidth={hot ? 1.6 : 1}
-                      strokeDasharray={hot ? "6 6" : "none"}
-                      vectorEffect="non-scaling-stroke"
-                      style={
-                        hot
-                          ? {
-                              transition: "stroke .15s ease",
-                              animation: "oc-flow 1.2s linear infinite",
-                            }
-                          : { transition: "stroke .15s ease" }
-                      }
-                    />
-                  );
-                })}
-              </svg>
-              {companies.slice(0, baseNodePositions.length).map((company, i) => {
-                const on = active === i;
-                const dot = on ? T.orange : trio[i % 3];
+              {edges.map(([a, b], i) => {
+                const hot = active === a || active === b;
                 return (
-                  <div
+                  <path
                     key={i}
-                    onMouseEnter={() => setActive(i)}
-                    style={{
-                      position: "absolute",
-                      left: `${pos[i].x}%`,
-                      top: `${pos[i].y}%`,
-                      transform: `translate(-50%,-50%) scale(${on ? 1.08 : 1})`,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 9,
-                      padding: "10px 16px",
-                      border: `1px solid ${on ? T.orange : "rgba(255,255,255,.16)"}`,
-                      borderRadius: 999,
-                      backdropFilter: "blur(4px)",
-                      background: on ? "rgba(226,106,44,.18)" : "rgba(11,16,32,.85)",
-                      boxShadow: on
-                        ? "0 0 34px rgba(226,106,44,.45)"
-                        : "0 0 18px rgba(11,16,32,.6)",
-                      cursor: "default",
-                      zIndex: 2,
-                      transition:
-                        "border-color .15s ease, background .15s ease, box-shadow .15s ease",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 7,
-                        height: 7,
-                        borderRadius: "50%",
-                        background: dot,
-                        boxShadow: `0 0 10px ${dot}`,
-                        flex: "none",
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontFamily: T.display,
-                        fontWeight: 600,
-                        fontSize: 15,
-                        color: "#fff",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {company.name}
-                    </span>
-                  </div>
+                    d={curve(a, b)}
+                    fill="none"
+                    stroke={hot ? T.orange : "rgba(255,255,255,.14)"}
+                    strokeWidth={hot ? 1.6 : 1}
+                    strokeDasharray={hot ? "6 6" : "none"}
+                    vectorEffect="non-scaling-stroke"
+                    style={
+                      hot
+                        ? {
+                            transition: "stroke .15s ease",
+                            animation: "oc-flow 1.2s linear infinite",
+                          }
+                        : { transition: "stroke .15s ease" }
+                    }
+                  />
                 );
               })}
-              <span
-                style={{
-                  position: "absolute",
-                  left: 32,
-                  bottom: 24,
-                  fontFamily: T.mono,
-                  fontSize: 9.5,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,.3)",
-                  zIndex: 2,
-                }}
-              >
-                Het Orange Creek universum
-              </span>
-            </div>
+            </svg>
+            {companies.slice(0, baseNodePositions.length).map((company, i) => {
+              const on = active === i;
+              const dot = on ? T.orange : trio[i % 3];
+              return (
+                <div
+                  key={i}
+                  onMouseEnter={() => setActive(i)}
+                  style={{
+                    position: "absolute",
+                    left: `${pos[i].x}%`,
+                    top: `${pos[i].y}%`,
+                    transform: `translate(-50%,-50%) scale(${on ? 1.08 : 1})`,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 9,
+                    padding: "10px 16px",
+                    border: `1px solid ${on ? T.orange : "rgba(255,255,255,.16)"}`,
+                    borderRadius: 999,
+                    backdropFilter: "blur(4px)",
+                    background: on ? "rgba(226,106,44,.18)" : "rgba(11,16,32,.85)",
+                    boxShadow: on
+                      ? "0 0 34px rgba(226,106,44,.45)"
+                      : "0 0 18px rgba(11,16,32,.6)",
+                    cursor: "default",
+                    zIndex: 2,
+                    transition:
+                      "border-color .15s ease, background .15s ease, box-shadow .15s ease",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: "50%",
+                      background: dot,
+                      boxShadow: `0 0 10px ${dot}`,
+                      flex: "none",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: T.display,
+                      fontWeight: 600,
+                      fontSize: 15,
+                      color: "#fff",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {company.name}
+                  </span>
+                </div>
+              );
+            })}
+            <span
+              style={{
+                position: "absolute",
+                left: 32,
+                bottom: 24,
+                fontFamily: T.mono,
+                fontSize: 9.5,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,.3)",
+                zIndex: 2,
+              }}
+            >
+              Het Orange Creek universum
+            </span>
 
             <div
               style={{
@@ -596,7 +599,7 @@ export default function OrangeCreekPortfolio({
                 display: "flex",
                 flexDirection: "column",
                 gap: 16,
-                minHeight: "clamp(520px, 58vh, 680px)",
+                minHeight: "clamp(560px, 62vh, 760px)",
                 pointerEvents: "none",
               }}
             >
@@ -618,11 +621,10 @@ export default function OrangeCreekPortfolio({
                   display: "flex",
                   flexDirection: "column",
                   gap: 6,
-                  border: "1px solid rgba(255,255,255,.12)",
                   borderRadius: 14,
                   padding: "22px 24px",
-                  background: "rgba(11,16,32,.72)",
-                  backdropFilter: "blur(12px)",
+                  background: "rgba(11,16,32,.55)",
+                  backdropFilter: "blur(16px)",
                   pointerEvents: "auto",
                 }}
               >
