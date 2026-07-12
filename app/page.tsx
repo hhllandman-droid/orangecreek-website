@@ -12,10 +12,10 @@ const holdings = [
 ];
 
 const stats = [
-  { value: "23", label: "Deelnemingen" },
+  { value: "5", label: "Deelnemingen" },
   { value: "8 jr", label: "Gem. holdperiode" },
-  { value: "€312M", label: "Beheerd vermogen" },
-  { value: "2,4×", label: "Gem. multiple" },
+  { value: "€22M", label: "NAV (Net asset value)" },
+  { value: "8,5×", label: "Gem. multiple" },
 ];
 
 const whyItems = [
@@ -190,7 +190,7 @@ export default function Home() {
             >
               <span className="landing-label">Portfolio</span>
               <h2 className="landing-heading">
-                23 bedrijven, één waardeketen.
+                5 bedrijven, één waardeketen.
               </h2>
             </div>
             <span className="landing-portfolio-meta">
@@ -229,7 +229,7 @@ export default function Home() {
           </h2>
           <p className="landing-contact-copy">
             Ondernemer, mede-investeerder of partner — obstakels zijn slechts
-            kansen voor de overwinner. We horen graag van je.
+            kansen voor de overwinnaar. We horen graag van je.
           </p>
           <a className="landing-btn-primary" href="mailto:info@orangecreek.co">
             info@orangecreek.co
@@ -241,7 +241,7 @@ export default function Home() {
         <div className="landing-footer-inner">
           <Logo size={16} theme="dark" tagline />
           <span className="landing-footer-copy">
-            © 2026 Orange Creek Capital · orangecreek.co
+            © 2026 Orange Creek · orangecreek.co
           </span>
         </div>
       </footer>
