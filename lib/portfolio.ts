@@ -1,6 +1,7 @@
 import type { PortfolioCompany } from '@/payload-types'
 
 import type { PortfolioCompanyItem } from '@/components/landing/OrangeCreekPortfolio'
+import { FALLBACK_WEBSITE_SETTINGS } from '@/lib/cms-fallbacks'
 import { getActivePortfolioCompanies, getWebsiteSettings } from '@/lib/cms'
 
 const FALLBACK_NODE_POS = [
@@ -91,28 +92,41 @@ export function buildNodePositions(
 }
 
 export async function getPortfolioSectionData(): Promise<PortfolioSectionData> {
-  const [companies, settings] = await Promise.all([
-    getActivePortfolioCompanies(50),
-    getWebsiteSettings(),
-  ])
-
-  if (companies.length === 0) {
-    return {
-      companies: [],
-      edges: [],
-      nodePositions: [],
-      title: settings.portfolioTitle ?? '8 bedrijven, één waardeketen.',
-      disclaimer: settings.portfolioDisclaimer ?? '',
-    }
+  const fallback: PortfolioSectionData = {
+    companies: [],
+    edges: [],
+    nodePositions: [],
+    title: FALLBACK_WEBSITE_SETTINGS.portfolioTitle ?? '8 bedrijven, één waardeketen.',
+    disclaimer: FALLBACK_WEBSITE_SETTINGS.portfolioDisclaimer ?? '',
   }
 
-  return {
-    companies: companies.map(toPortfolioCompanyItem),
-    edges: buildPortfolioEdges(companies),
-    nodePositions: buildNodePositions(companies),
-    title:
-      settings.portfolioTitle ??
-      `${companies.length} bedrijven, één waardeketen.`,
-    disclaimer: settings.portfolioDisclaimer ?? '',
+  try {
+    const [companies, settings] = await Promise.all([
+      getActivePortfolioCompanies(50),
+      getWebsiteSettings(),
+    ])
+
+    if (companies.length === 0) {
+      return {
+        companies: [],
+        edges: [],
+        nodePositions: [],
+        title: settings.portfolioTitle ?? fallback.title,
+        disclaimer: settings.portfolioDisclaimer ?? fallback.disclaimer,
+      }
+    }
+
+    return {
+      companies: companies.map(toPortfolioCompanyItem),
+      edges: buildPortfolioEdges(companies),
+      nodePositions: buildNodePositions(companies),
+      title:
+        settings.portfolioTitle ??
+        `${companies.length} bedrijven, één waardeketen.`,
+      disclaimer: settings.portfolioDisclaimer ?? '',
+    }
+  } catch (error) {
+    console.error('[portfolio] getPortfolioSectionData failed', error)
+    return fallback
   }
 }

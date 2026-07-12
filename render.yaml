@@ -14,7 +14,7 @@ services:
     plan: free
     region: frankfurt
     buildCommand: npm ci --include=dev && npm run build
-    startCommand: npm run start:production
+    startCommand: sh scripts/start-production.sh
     preDeployCommand: npm run migrate
     autoDeployTrigger: commit
     envVars:
