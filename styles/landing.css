@@ -348,79 +348,6 @@
   margin: 0;
 }
 
-.landing-portfolio-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 32px;
-  margin-bottom: 48px;
-}
-
-.landing-portfolio-meta {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11.5px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #8590a8;
-  white-space: nowrap;
-  padding-bottom: 6px;
-}
-
-.landing-holdings-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.landing-holding {
-  border: 1px solid #e7ecf3;
-  border-radius: 14px;
-  padding: 24px 26px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  transition: border-color 0.15s ease;
-}
-
-.landing-holding:hover {
-  border-color: #d9e0ea;
-}
-
-.landing-holding-name {
-  font-family: "Space Grotesk", sans-serif;
-  font-weight: 600;
-  font-size: 17px;
-  color: #0b1020;
-}
-
-.landing-holding-domain {
-  font-size: 13px;
-  color: #8590a8;
-}
-
-.landing-holding-since {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #5b6680;
-}
-
-.landing-holding-dot {
-  width: 7px;
-  height: 7px;
-}
-
-.landing-portfolio-note {
-  font-size: 13.5px;
-  color: #8590a8;
-  margin: 24px 0 0;
-}
-
 .landing-contact {
   background: #0b1020;
   position: relative;
@@ -504,8 +431,7 @@
   }
 
   .landing-stats-grid,
-  .landing-cards-grid,
-  .landing-holdings-grid {
+  .landing-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -516,17 +442,11 @@
   .landing-why-sidebar {
     position: static;
   }
-
-  .landing-portfolio-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media (max-width: 640px) {
   .landing-stats-grid,
-  .landing-cards-grid,
-  .landing-holdings-grid {
+  .landing-cards-grid {
     grid-template-columns: 1fr;
   }
 

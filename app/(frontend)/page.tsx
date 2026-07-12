@@ -1,15 +1,7 @@
 import Image from "next/image";
 import { Logo } from "@/components/brand/Logo";
+import OrangeCreekPortfolio from "@/components/landing/OrangeCreekPortfolio";
 import "@/styles/landing.css";
-
-const holdings = [
-  { name: "Deelneming A", domain: "SaaS · workflow", since: "2019" },
-  { name: "Deelneming B", domain: "Logistiek · platform", since: "2020" },
-  { name: "Deelneming C", domain: "Energie · data", since: "2021" },
-  { name: "Deelneming D", domain: "Fintech · B2B", since: "2018" },
-  { name: "Deelneming E", domain: "Circulair · productie", since: "2022" },
-  { name: "Deelneming F", domain: "Health · software", since: "2023" },
-];
 
 const stats = [
   { value: "5", label: "Deelnemingen" },
@@ -177,46 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="portfolio" className="landing-section">
-        <div className="landing-section-inner landing-section-padded">
-          <div className="landing-portfolio-header">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 16,
-                maxWidth: 640,
-              }}
-            >
-              <span className="landing-label">Portfolio</span>
-              <h2 className="landing-heading">
-                5 bedrijven, één waardeketen.
-              </h2>
-            </div>
-            <span className="landing-portfolio-meta">
-              Gem. 8 jaar in portefeuille
-            </span>
-          </div>
-          <div className="landing-holdings-grid">
-            {holdings.map((holding) => (
-              <div key={holding.name} className="landing-holding">
-                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                  <span className="landing-holding-name">{holding.name}</span>
-                  <span className="landing-holding-domain">{holding.domain}</span>
-                </div>
-                <span className="landing-holding-since">
-                  <span className="oc-dot landing-holding-dot" />
-                  {holding.since}
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="landing-portfolio-note">
-            Een selectie — namen zijn placeholders tot publicatie is afgestemd
-            met de deelnemingen.
-          </p>
-        </div>
-      </section>
+      <OrangeCreekPortfolio />
 
       <section id="contact" className="landing-contact">
         <div className="landing-contact-glow" />
