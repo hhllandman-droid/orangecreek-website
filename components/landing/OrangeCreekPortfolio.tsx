@@ -426,134 +426,44 @@ export default function OrangeCreekPortfolio({
         ) : (
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "340px 1fr",
-              gap: 56,
-              alignItems: "stretch",
+              position: "relative",
+              margin: "0 -32px",
+              minHeight: "clamp(520px, 58vh, 680px)",
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <p
-                style={{
-                  fontSize: 15,
-                  lineHeight: 1.55,
-                  color: "rgba(255,255,255,.6)",
-                  margin: 0,
-                }}
-              >
-                Geen losse deelnemingen, maar één keten waarin elke schakel de rest versterkt.
-                Beweeg over een bedrijf om zijn verbindingen en cijfers te zien.
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 6,
-                  border: "1px solid rgba(255,255,255,.12)",
-                  borderRadius: 14,
-                  padding: "22px 24px",
-                  background: "rgba(255,255,255,.03)",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: T.display,
-                    fontWeight: 600,
-                    fontSize: 24,
-                    letterSpacing: "-0.02em",
-                    color: "#fff",
-                  }}
-                >
-                  {activeCompany.name}
-                </span>
-                <span style={monoLabel()}>
-                  {activeCompany.domain} · sinds {activeCompany.since}
-                </span>
-                <div style={{ display: "flex", gap: 22, marginTop: 14 }}>
-                  {(
-                    [
-                      ["groei", "Groei", T.orange],
-                      ["marge", "Marge", T.green],
-                      ["multiple", "Multiple", T.blue],
-                    ] as const
-                  ).map(([key, label, color]) => (
-                    <div key={key} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                      <span
-                        style={{
-                          fontFamily: T.display,
-                          fontWeight: 600,
-                          fontSize: 20,
-                          color,
-                        }}
-                      >
-                        {activeCompany[key]}
-                      </span>
-                      <span
-                        style={monoLabel({ fontSize: 9.5, letterSpacing: "0.16em" })}
-                      >
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginTop: "auto",
-                  ...monoLabel({ fontSize: 10, color: "rgba(255,255,255,.4)" }),
-                }}
-              >
-                <span
-                  style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: "50%",
-                    background: T.orange,
-                    flex: "none",
-                  }}
-                />
-                Kapitaal &amp; kennis stromen door de keten
-              </div>
-            </div>
-
             <div
               style={{
-                position: "relative",
-                height: 460,
-                border: "1px solid rgba(255,255,255,.1)",
-                borderRadius: 18,
-                overflow: "hidden",
+                position: "absolute",
+                inset: 0,
+                overflow: "visible",
                 background:
-                  "radial-gradient(ellipse 80% 70% at 68% 30%, #131a33 0%, #0b1020 55%, #070b18 100%)",
+                  "radial-gradient(ellipse 90% 80% at 62% 35%, #131a33 0%, #0b1020 50%, #070b18 100%)",
               }}
             >
               <div
                 style={{
                   position: "absolute",
                   top: -120,
-                  right: -80,
-                  width: 380,
-                  height: 380,
+                  right: -40,
+                  width: 520,
+                  height: 520,
                   borderRadius: "50%",
                   background: T.orange,
-                  opacity: 0.12,
-                  filter: "blur(110px)",
+                  opacity: 0.14,
+                  filter: "blur(120px)",
                 }}
               />
               <div
                 style={{
                   position: "absolute",
-                  bottom: -140,
-                  left: -90,
-                  width: 400,
-                  height: 400,
+                  bottom: -160,
+                  left: -60,
+                  width: 560,
+                  height: 560,
                   borderRadius: "50%",
                   background: T.blue,
-                  opacity: 0.14,
-                  filter: "blur(120px)",
+                  opacity: 0.16,
+                  filter: "blur(130px)",
                 }}
               />
               <div
@@ -662,8 +572,8 @@ export default function OrangeCreekPortfolio({
               <span
                 style={{
                   position: "absolute",
-                  left: 22,
-                  bottom: 16,
+                  left: 32,
+                  bottom: 24,
                   fontFamily: T.mono,
                   fontSize: 9.5,
                   letterSpacing: "0.2em",
@@ -674,6 +584,111 @@ export default function OrangeCreekPortfolio({
               >
                 Het Orange Creek universum
               </span>
+            </div>
+
+            <div
+              style={{
+                position: "relative",
+                zIndex: 3,
+                width: "min(340px, calc(100% - 64px))",
+                marginLeft: 32,
+                padding: "8px 0 56px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                minHeight: "clamp(520px, 58vh, 680px)",
+                pointerEvents: "none",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.55,
+                  color: "rgba(255,255,255,.6)",
+                  margin: 0,
+                  pointerEvents: "auto",
+                  textShadow: "0 1px 12px rgba(11,16,32,.8)",
+                }}
+              >
+                Geen losse deelnemingen, maar één keten waarin elke schakel de rest versterkt.
+                Beweeg over een bedrijf om zijn verbindingen en cijfers te zien.
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 6,
+                  border: "1px solid rgba(255,255,255,.12)",
+                  borderRadius: 14,
+                  padding: "22px 24px",
+                  background: "rgba(11,16,32,.72)",
+                  backdropFilter: "blur(12px)",
+                  pointerEvents: "auto",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: T.display,
+                    fontWeight: 600,
+                    fontSize: 24,
+                    letterSpacing: "-0.02em",
+                    color: "#fff",
+                  }}
+                >
+                  {activeCompany.name}
+                </span>
+                <span style={monoLabel()}>
+                  {activeCompany.domain} · sinds {activeCompany.since}
+                </span>
+                <div style={{ display: "flex", gap: 22, marginTop: 14 }}>
+                  {(
+                    [
+                      ["groei", "Groei", T.orange],
+                      ["marge", "Marge", T.green],
+                      ["multiple", "Multiple", T.blue],
+                    ] as const
+                  ).map(([key, label, color]) => (
+                    <div key={key} style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                      <span
+                        style={{
+                          fontFamily: T.display,
+                          fontWeight: 600,
+                          fontSize: 20,
+                          color,
+                        }}
+                      >
+                        {activeCompany[key]}
+                      </span>
+                      <span
+                        style={monoLabel({ fontSize: 9.5, letterSpacing: "0.16em" })}
+                      >
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  marginTop: "auto",
+                  pointerEvents: "auto",
+                  ...monoLabel({ fontSize: 10, color: "rgba(255,255,255,.4)" }),
+                }}
+              >
+                <span
+                  style={{
+                    width: 7,
+                    height: 7,
+                    borderRadius: "50%",
+                    background: T.orange,
+                    flex: "none",
+                  }}
+                />
+                Kapitaal &amp; kennis stromen door de keten
+              </div>
             </div>
           </div>
         )}
