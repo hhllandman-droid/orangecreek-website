@@ -30,3 +30,5 @@ services:
           property: connectionString
       - key: PAYLOAD_SECRET
         generateValue: true
+      - key: PAYLOAD_DEBUG
+        value: "true"

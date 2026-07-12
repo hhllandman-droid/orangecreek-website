@@ -36,6 +36,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   globals: [WebsiteSettings],
   secret: process.env.PAYLOAD_SECRET || '',
+  debug: process.env.PAYLOAD_DEBUG === 'true',
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

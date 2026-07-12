@@ -46,6 +46,21 @@ async function ensureSchema() {
   const client = await pool.connect()
 
   try {
+    const tableCheck = await client.query<{ exists: boolean }>(`
+      SELECT EXISTS (
+        SELECT 1
+        FROM information_schema.tables
+        WHERE table_schema = 'public' AND table_name = 'portfolio_companies'
+      ) AS exists
+    `)
+
+    if (!tableCheck.rows[0]?.exists) {
+      console.error(
+        'ensure-schema: portfolio_companies table missing — initial migration never ran.',
+      )
+      process.exit(1)
+    }
+
     // Enum changes cannot run inside a transaction on some Postgres setups.
     await client.query(`
       DO $$
