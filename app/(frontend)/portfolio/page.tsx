@@ -1,6 +1,7 @@
 import { getPayloadClient } from '@/lib/payload'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 /**
  * Voorbeeld: portefeuillebedrijven ophalen in een Server Component.

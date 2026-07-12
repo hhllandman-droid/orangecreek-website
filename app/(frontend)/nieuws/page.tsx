@@ -1,6 +1,7 @@
 import { getPayloadClient } from '@/lib/payload'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 /**
  * Voorbeeld: gepubliceerd nieuws ophalen in een Server Component.
