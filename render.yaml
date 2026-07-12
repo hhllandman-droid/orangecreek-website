@@ -1,3 +1,12 @@
+databases:
+  - name: orangecreek-db
+    databaseName: orangecreek
+    user: orangecreek
+    plan: free
+    region: frankfurt
+    postgresMajorVersion: "16"
+    ipAllowList: []
+
 services:
   - type: web
     name: orangecreek-website
@@ -7,3 +16,12 @@ services:
     buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start
     autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URI
+        fromDatabase:
+          name: orangecreek-db
+          property: connectionString
+      - key: PAYLOAD_SECRET
+        generateValue: true
