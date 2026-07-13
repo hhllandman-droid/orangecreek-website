@@ -22,4 +22,13 @@ else
   echo "WARNING: seed failed — continuing startup."
 fi
 
+if [ -n "${ADMIN_RESET_PASSWORD:-}" ]; then
+  echo "Resetting admin password..."
+  if npx tsx scripts/reset-admin-password.ts; then
+    echo "Admin password reset complete."
+  else
+    echo "WARNING: admin password reset failed — continuing startup."
+  fi
+fi
+
 exec npm run start:next

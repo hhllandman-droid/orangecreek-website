@@ -11,6 +11,7 @@ import { News } from './collections/News'
 import { PortfolioCompanies } from './collections/PortfolioCompanies'
 import { Users } from './collections/Users'
 import { WebsiteSettings } from './globals/WebsiteSettings'
+import { birdEmailAdapter, isBirdEmailConfigured } from './lib/email/birdAdapter'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -37,6 +38,18 @@ export default buildConfig({
   globals: [WebsiteSettings],
   secret: process.env.PAYLOAD_SECRET || '',
   debug: process.env.PAYLOAD_DEBUG === 'true',
+  ...(isBirdEmailConfigured()
+    ? {
+        email: birdEmailAdapter({
+          apiKey: process.env.BIRD_API_KEY || '',
+          workspaceId: process.env.BIRD_WORKSPACE_ID || '',
+          channelId: process.env.BIRD_CHANNEL_ID || '',
+          defaultFromAddress: process.env.BIRD_FROM_EMAIL || '',
+          defaultFromName: process.env.BIRD_FROM_NAME || 'Orange Creek Capital',
+          apiBase: process.env.BIRD_API_BASE,
+        }),
+      }
+    : {}),
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

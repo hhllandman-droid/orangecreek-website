@@ -9,7 +9,28 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'roles'],
     useAsTitle: 'name',
   },
-  auth: true,
+  auth: {
+    forgotPassword: {
+      generateEmailHTML: (args) => {
+        const token = args?.token ?? ''
+        const user = args?.user
+        const serverURL =
+          process.env.NEXT_PUBLIC_SERVER_URL ||
+          process.env.RENDER_EXTERNAL_URL ||
+          'https://orangecreek.co'
+        const resetURL = `${serverURL.replace(/\/$/, '')}/admin/reset/${token}`
+
+        return `
+          <p>Hallo${user.name ? ` ${user.name}` : ''},</p>
+          <p>Je hebt een verzoek ingediend om je wachtwoord voor het Orange Creek CMS te resetten.</p>
+          <p><a href="${resetURL}">Klik hier om een nieuw wachtwoord in te stellen</a></p>
+          <p>Of kopieer deze link in je browser:<br>${resetURL}</p>
+          <p>Heb je dit niet aangevraagd? Negeer deze e-mail dan.</p>
+        `
+      },
+      generateEmailSubject: () => 'Reset je Orange Creek CMS-wachtwoord',
+    },
+  },
   access: {
     admin: isAdmin,
     create: adminOrFirstUser,
