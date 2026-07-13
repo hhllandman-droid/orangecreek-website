@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Logo } from "@/components/brand/Logo";
 import PortfolioSection from "@/components/landing/PortfolioSection";
+import NewsSection from "@/components/landing/NewsSection";
 import "@/styles/landing.css";
 
 const stats = [
@@ -58,6 +59,9 @@ export default function Home() {
             </a>
             <a className="landing-nav-link" href="#portfolio">
               Portfolio
+            </a>
+            <a className="landing-nav-link" href="#nieuws">
+              Nieuws
             </a>
             <a className="landing-nav-cta" href="#contact">
               Neem contact op
@@ -170,6 +174,8 @@ export default function Home() {
       </section>
 
       <PortfolioSection />
+
+      <NewsSection />
 
       <section id="contact" className="landing-contact">
         <div className="landing-contact-glow" />
