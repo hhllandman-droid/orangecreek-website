@@ -42,10 +42,8 @@ export default buildConfig({
     ? {
         email: birdEmailAdapter({
           apiKey: process.env.BIRD_API_KEY || '',
-          workspaceId: process.env.BIRD_WORKSPACE_ID || '',
-          channelId: process.env.BIRD_CHANNEL_ID || '',
           defaultFromAddress: process.env.BIRD_FROM_EMAIL || '',
-          defaultFromName: process.env.BIRD_FROM_NAME || 'Orange Creek Capital',
+          defaultFromName: process.env.BIRD_FROM_NAME || 'Orange Creek',
           apiBase: process.env.BIRD_API_BASE,
         }),
       }

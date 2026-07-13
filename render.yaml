@@ -32,14 +32,10 @@ services:
         generateValue: true
       - key: BIRD_API_KEY
         sync: false
-      - key: BIRD_WORKSPACE_ID
-        sync: false
-      - key: BIRD_CHANNEL_ID
-        sync: false
       - key: BIRD_FROM_EMAIL
-        value: info@orangecreek.co
+        value: noreply@orangecreek.co
       - key: BIRD_FROM_NAME
-        value: Orange Creek Capital
+        value: Orange Creek
       - key: ADMIN_RESET_PASSWORD
         sync: false
       - key: ADMIN_RESET_SECRET

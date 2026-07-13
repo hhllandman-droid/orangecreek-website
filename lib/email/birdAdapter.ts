@@ -2,8 +2,6 @@ import type { EmailAdapter, SendEmailOptions } from 'payload'
 
 type BirdAdapterOptions = {
   apiKey: string
-  workspaceId: string
-  channelId: string
   defaultFromAddress: string
   defaultFromName: string
   apiBase?: string
@@ -55,9 +53,33 @@ function resolveFromName(
   return defaultName
 }
 
+function resolveApiBase(apiKey: string, explicitBase?: string): string {
+  if (explicitBase?.trim()) {
+    return explicitBase.replace(/\/$/, '')
+  }
+
+  if (apiKey.includes('_eu1_')) {
+    return 'https://eu1.platform.bird.com'
+  }
+
+  if (apiKey.includes('_us1_')) {
+    return 'https://us1.platform.bird.com'
+  }
+
+  // Frankfurt-deploy + eu1.smtp.bird.com in Bird-dashboard
+  return 'https://eu1.platform.bird.com'
+}
+
+function formatFromHeader(name: string | undefined, address: string): string {
+  if (name?.trim()) {
+    return `${name.trim()} <${address}>`
+  }
+  return address
+}
+
 export function birdEmailAdapter(options: BirdAdapterOptions): EmailAdapter {
-  const apiBase = (options.apiBase ?? 'https://api.bird.com').replace(/\/$/, '')
-  const endpoint = `${apiBase}/workspaces/${options.workspaceId}/channels/${options.channelId}/messages`
+  const apiBase = resolveApiBase(options.apiKey, options.apiBase)
+  const endpoint = `${apiBase}/v1/email/messages`
 
   return () => ({
     name: 'bird',
@@ -74,36 +96,26 @@ export function birdEmailAdapter(options: BirdAdapterOptions): EmailAdapter {
       const text = typeof message.text === 'string' ? message.text : ''
       const html = typeof message.html === 'string' ? message.html : undefined
 
-      const sender: { emailAddress: string; displayName?: string } = {
-        emailAddress: fromEmail,
-      }
-      if (fromName) {
-        sender.displayName = fromName
+      const payload: Record<string, string | string[]> = {
+        from: formatFromHeader(fromName, fromEmail),
+        to: [toEmail],
+        subject: message.subject ?? 'Bericht van Orange Creek',
       }
 
-      const body = html
-        ? { type: 'html' as const, html: { html, text: text || html.replace(/<[^>]+>/g, '') } }
-        : { type: 'text' as const, text: { text: text || message.subject || '' } }
+      if (html) {
+        payload.html = html
+        payload.text = text || html.replace(/<[^>]+>/g, '')
+      } else {
+        payload.text = text || message.subject || ''
+      }
 
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
-          Authorization: `AccessKey ${options.apiKey}`,
+          Authorization: `Bearer ${options.apiKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          receiver: {
-            contacts: [
-              {
-                identifierKey: 'emailaddress',
-                identifierValue: toEmail,
-              },
-            ],
-          },
-          sender,
-          subject: message.subject ?? 'Bericht van Orange Creek',
-          body,
-        }),
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) {
@@ -121,10 +133,5 @@ export function birdEmailAdapter(options: BirdAdapterOptions): EmailAdapter {
 }
 
 export function isBirdEmailConfigured(): boolean {
-  return Boolean(
-    process.env.BIRD_API_KEY &&
-      process.env.BIRD_WORKSPACE_ID &&
-      process.env.BIRD_CHANNEL_ID &&
-      process.env.BIRD_FROM_EMAIL,
-  )
+  return Boolean(process.env.BIRD_API_KEY && process.env.BIRD_FROM_EMAIL)
 }
