@@ -358,7 +358,7 @@ export default function OrangeCreekPortfolio({
           position: "relative",
           maxWidth: 1180,
           margin: "0 auto",
-          padding: "104px 32px 96px",
+          padding: "104px 32px 48px",
         }}
       >
         <div
@@ -367,7 +367,6 @@ export default function OrangeCreekPortfolio({
             alignItems: "flex-end",
             justifyContent: "space-between",
             gap: 32,
-            marginBottom: 48,
           }}
         >
           <div
@@ -419,6 +418,7 @@ export default function OrangeCreekPortfolio({
             </button>
           </div>
         </div>
+      </div>
 
         {view === "ticker" ? (
           <>
@@ -428,7 +428,7 @@ export default function OrangeCreekPortfolio({
                 flexDirection: "column",
                 gap: 14,
                 overflow: "hidden",
-                margin: "0 -32px",
+                width: "100%",
               }}
             >
               <MarqueeRow
@@ -449,39 +449,52 @@ export default function OrangeCreekPortfolio({
             </div>
             <div
               style={{
-                display: "grid",
-                gridTemplateColumns: "1.4fr 1fr 1fr 1fr",
-                gap: 24,
-                alignItems: "center",
-                marginTop: 44,
+                position: "relative",
+                maxWidth: 1180,
+                margin: "0 auto",
+                padding: "44px 32px 96px",
               }}
             >
-              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-                <span
-                  style={{
-                    fontFamily: T.display,
-                    fontWeight: 600,
-                    fontSize: 26,
-                    letterSpacing: "-0.02em",
-                    color: "#fff",
-                  }}
-                >
-                  {activeCompany.name}
-                </span>
-                <span style={monoLabel()}>
-                  {activeCompany.domain} · sinds {activeCompany.since}
-                </span>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1.4fr 1fr 1fr 1fr",
+                  gap: 24,
+                  alignItems: "center",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                  <span
+                    style={{
+                      fontFamily: T.display,
+                      fontWeight: 600,
+                      fontSize: 26,
+                      letterSpacing: "-0.02em",
+                      color: "#fff",
+                    }}
+                  >
+                    {activeCompany.name}
+                  </span>
+                  <span style={monoLabel()}>
+                    {activeCompany.domain} · sinds {activeCompany.since}
+                  </span>
+                </div>
+                <Kpi value={activeCompany.groei} label="Omzetgroei YoY" color={T.orange} />
+                <Kpi value={activeCompany.marge} label="EBITDA-marge" color={T.green} />
+                <Kpi value={activeCompany.multiple} label="Multiple" color={T.blue} />
               </div>
-              <Kpi value={activeCompany.groei} label="Omzetgroei YoY" color={T.orange} />
-              <Kpi value={activeCompany.marge} label="EBITDA-marge" color={T.green} />
-              <Kpi value={activeCompany.multiple} label="Multiple" color={T.blue} />
+              {disclaimer ? (
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,.35)", margin: "40px 0 0" }}>
+                  {disclaimer}
+                </p>
+              ) : null}
             </div>
           </>
         ) : (
           <div
             style={{
               position: "relative",
-              margin: "0 -32px",
+              width: "100%",
               minHeight: "clamp(560px, 62vh, 760px)",
             }}
           >
@@ -573,36 +586,44 @@ export default function OrangeCreekPortfolio({
                 </div>
               );
             })}
-            <span
-              style={{
-                position: "absolute",
-                left: 32,
-                bottom: 24,
-                fontFamily: T.mono,
-                fontSize: 9.5,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,.3)",
-                zIndex: 2,
-              }}
-            >
-              Het Orange Creek universum
-            </span>
-
             <div
               style={{
-                position: "relative",
-                zIndex: 3,
-                width: "min(340px, calc(100% - 64px))",
-                marginLeft: 32,
-                padding: "8px 0 56px",
-                display: "flex",
-                flexDirection: "column",
-                gap: 16,
-                minHeight: "clamp(560px, 62vh, 760px)",
+                position: "absolute",
+                inset: 0,
+                maxWidth: 1180,
+                margin: "0 auto",
                 pointerEvents: "none",
               }}
             >
+              <span
+                style={{
+                  position: "absolute",
+                  left: 32,
+                  bottom: 24,
+                  fontFamily: T.mono,
+                  fontSize: 9.5,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "rgba(255,255,255,.3)",
+                  zIndex: 2,
+                }}
+              >
+                Het Orange Creek universum
+              </span>
+
+              <div
+                style={{
+                  position: "relative",
+                  zIndex: 3,
+                  width: "min(340px, calc(100% - 64px))",
+                  marginLeft: 32,
+                  padding: "8px 0 56px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  minHeight: "clamp(560px, 62vh, 760px)",
+                }}
+              >
               <p
                 style={{
                   fontSize: 15,
@@ -692,15 +713,24 @@ export default function OrangeCreekPortfolio({
                 Kapitaal &amp; kennis stromen door de keten
               </div>
             </div>
+            </div>
           </div>
         )}
 
-        {disclaimer ? (
+      {view === "keten" && disclaimer ? (
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 1180,
+            margin: "0 auto",
+            padding: "0 32px 96px",
+          }}
+        >
           <p style={{ fontSize: 13, color: "rgba(255,255,255,.35)", margin: "40px 0 0" }}>
             {disclaimer}
           </p>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </section>
   );
 }
