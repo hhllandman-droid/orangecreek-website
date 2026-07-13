@@ -100,6 +100,7 @@ export function birdEmailAdapter(options: BirdAdapterOptions): EmailAdapter {
         from: formatFromHeader(fromName, fromEmail),
         to: [toEmail],
         subject: message.subject ?? 'Bericht van Orange Creek',
+        category: 'transactional',
       }
 
       if (html) {
